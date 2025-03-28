@@ -189,8 +189,8 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
     //name ??= "";
     print("is_visible===$is_visible");
     savedCardNo = prefs.getString('cardno');
-    print("**** cardNo :- $savedCardNo");
-
+    cardno = prefs.getString('cardno');
+    print("**** cardNo :- $cardno , isvisible==> $is_visible");
     setState(() {
       if(prefs.getString('userName')!=null && prefs.getString('passwords')!=null) {
         username = prefs.getString('userName');
@@ -429,7 +429,7 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
                                 )
                               : SizedBox(),
                         //check in / checkout button
-                      if (is_visible == "true")
+                      if (is_visible == "true" && cardno!=null)
                         Padding(
                           padding: const EdgeInsets.only(top: 20.0),
                           child: Row(
@@ -769,8 +769,8 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
           cardno = jsonResponse['cardno'];
           empName = jsonResponse['empname'];
           print('cardno:===== $cardno');
-          prefs.setString('cardno', cardno!);
-          prefs.setString('empName', empName!);
+          prefs.setString('cardno', jsonResponse['cardno']);
+          prefs.setString('empName',  jsonResponse['empname']);
         }
 
         var imeiStatus = jsonResponse['imei_status'];
